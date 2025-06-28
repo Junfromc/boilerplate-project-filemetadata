@@ -7,7 +7,6 @@ const uploadDest = "./public/uploads/";
 const upload = multer({ dest: uploadDest });
 var app = express();
 const fs = require("fs");
-const path = require("path");
 
 app.use(cors());
 app.use("/public", express.static(process.cwd() + "/public"));
@@ -28,6 +27,7 @@ app.post("/api/fileanalyse", upload.single("upfile"), (req, res) => {
     size: req.file.size,
   };
   console.log('req.file:', req.file);
+  res.json(fileInfo);
   fs.rm(req.file.path, {force: true},(err)=>{
     if (err) throw err;
     console.log('Temporary file deleted successfully');
