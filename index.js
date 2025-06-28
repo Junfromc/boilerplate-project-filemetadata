@@ -22,7 +22,7 @@ app.post("/api/fileanalyse", upload.single("upfile"), (req, res) => {
     return res.status(400).json({ error: "no file uploaded" });
   }
   const fileInfo = {
-    name: req.file.filename,
+    name: req.file.originalname,
     type: req.file.mimetype,
     size: req.file.size,
   };
